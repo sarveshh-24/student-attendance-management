@@ -1,109 +1,205 @@
-# 🎓 MERN Student Attendance Management System
+# Student Attendance Management System
 
-[![Deployed on Render](https://img.shields.io/badge/Backend-Render-46a2f1?logo=render)](https://student-attandance-management-system.netlify.app/)
-[![Deployed on Netlify](https://img.shields.io/badge/Frontend-Netlify-00c7b7?logo=netlify)](https://student-attandance-management-system.netlify.app/)
-[![Docker](https://img.shields.io/badge/Docker-Hub-2496ed?logo=docker)](https://hub.docker.com/repository/docker/pradeep2005/mern-server/general)
+A full-stack web application for managing student attendance through separate student and teacher interfaces.
 
+## Overview
 
+The Student Attendance Management System provides a centralized platform for recording, viewing, and managing attendance information.
 
-## 📌 Overview
+The application includes role-based access for students and teachers, secure authentication using JWT, and a REST-based backend connected to a database.
 
-A **Full-Stack Student Attendance Management System** built with the **MERN stack**.  
-It enables teachers to manage students, track attendance, and enforce **role-based access control** with a modern, responsive UI.
+## Features
 
+* Student and teacher login
+* Role-based access and navigation
+* JWT-based authentication
+* Password protection using bcrypt
+* Student attendance tracking
+* Teacher attendance management
+* Attendance records and status updates
+* REST API for frontend-backend communication
+* Responsive user interface
+* Persistent authentication using browser local storage
 
+## Tech Stack
 
----
-## 🧑‍💻 Demo Credentials
+### Frontend
 
-Use the following credentials to explore the application:
+* React
+* React Router
+* Tailwind CSS
+* Vite
+* JavaScript
 
-### 👩‍🏫 Teacher Login
-- **ID:** `t001`  
-- **Password:** `abc@123`
+### Backend
 
-### 🎓 Student Login
-- **ID:** `std_1`  
-- **Password:** `linus@123`
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* JSON Web Token (JWT)
+* bcrypt
 
-⚠️ *These demo accounts are provided only for testing purposes.*
+### Development & Deployment
 
+* Git
+* GitHub
+* Docker
+* GitHub Actions
 
-## ⚡ Technical Highlights
+## Project Structure
 
-- Built with **MERN Stack** (MongoDB, Express.js, React, Node.js)  
-- Secured with **bcrypt** for password hashing & **JWT** for authentication  
-- Input validation handled using **express-validator**  
-- Styled with **Tailwind CSS** for responsive and modern UI design  
-- Version controlled with **Git & GitHub** for collaboration and source management 
-
----
-## 🚀 Deployment Workflow
-
-This project follows a **professional-grade CI/CD pipeline**:
-
-```mermaid
-flowchart LR
-    A[Commit to GitHub] --> B[GitHub Actions]
-    B --> C[Build Docker Image]
-    C --> D[Push to Docker Hub]
-    D --> E[Render Webhook]
-    E --> F[Render Backend Deploy]
-    A --> G[Netlify Build & Deploy]
-    G --> H[Frontend Live]
+```text
+student-attendance-management/
+│
+├── client/
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── ...
+│   ├── package.json
+│   └── ...
+│
+├── server/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── middleware/
+│   ├── package.json
+│   └── ...
+│
+├── .github/
+│   └── workflows/
+│
+├── package.json
+├── package-lock.json
+└── README.md
 ```
-🔄 **Flow**
 
-- Commit pushed → GitHub Actions runs  
-- **Backend**: Docker image built → pushed to Docker Hub → Render auto-deploys via webhook  
-- **Frontend**: Netlify auto-builds & deploys React app  
+## Authentication
+
+The application uses JWT-based authentication.
+
+During login, the backend validates the supplied credentials and returns a JSON Web Token. The frontend stores the token locally and uses the authenticated session to provide access to the appropriate student or teacher interface.
+
+Passwords are handled using bcrypt rather than being stored directly in plain text.
+
+## Getting Started
+
+### Prerequisites
+
+Make sure the following are installed:
+
+* Node.js
+* npm
+* MongoDB
+
+### 1. Clone the Repository
+
+```bash
+git clone YOUR_REPOSITORY_URL
+cd student-attendance-management
+```
+
+### 2. Install Dependencies
+
+Install the root dependencies:
+
+```bash
+npm install
+```
+
+Then install the client dependencies:
+
+```bash
+cd client
+npm install
+```
+
+Install the server dependencies:
+
+```bash
+cd ../server
+npm install
+```
+
+### 3. Configure Environment Variables
+
+Create the required environment files for the client and server.
+
+The exact variables depend on your local database and deployment configuration.
+
+Do not commit sensitive values such as:
+
+* Database connection strings
+* JWT secrets
+* API keys
+* Production credentials
+
+### 4. Start the Application
+
+Start the backend from the `server` directory:
+
+```bash
+npm start
+```
+
+Start the frontend from the `client` directory:
+
+```bash
+npm run dev
+```
+
+The frontend will then be available through the local Vite development server.
+
+## API Communication
+
+The frontend communicates with the Express backend through the API URL configured using the Vite environment variable:
+
+```text
+VITE_API_URL
+```
+
+This keeps the frontend independent of a hard-coded backend address and allows the API endpoint to be changed for different environments.
+
+## User Roles
+
+### Student
+
+Students can log in using their student credentials and access the features available to their role, including viewing attendance information.
+
+### Teacher
+
+Teachers can log in through the teacher interface and manage attendance-related information for students.
+
+## Security Considerations
+
+* Authentication is handled using JWT.
+* Passwords are protected using bcrypt hashing.
+* Sensitive configuration values should be stored in environment variables.
+* Environment files containing secrets should not be committed to the repository.
+* Authentication tokens are required for protected application functionality.
+
+## Future Improvements
+
+Possible improvements include:
+
+* Attendance analytics and visual reports
+* Exporting attendance records
+* Improved form validation
+* Password reset functionality
+* Email notifications
+* More granular role and permission management
+* Improved automated testing
+* Enhanced deployment monitoring
+
+## License
+
+This project is intended for educational and portfolio purposes.
 
 ---
 
-🔒 **Environment Variables**
-
-Both **frontend (Netlify)** and **backend (Render)** use environment variables for sensitive data (MongoDB URI, JWT secrets, API keys).  
-➡️ No secrets are exposed in the codebase.  
-
----
-
-🛠️ **Tech Stack**
-
-- **Frontend**: React, Tailwind CSS, React Router DOM  
-- **Backend**: Node.js, Express.js  
-- **Database**: MongoDB + Mongoose  
-- **Authentication**: JWT, bcrypt  
-- **Validation & Security**: express-validator, sanitization  
-- **Deployment**: GitHub Actions, Docker, Docker Hub, Render, Netlify  
-
----
-
-✨ **Features**
-
-👩‍🏫 **Teacher**  
-- Add / delete students  
-- Mark and update attendance  
-- View student records in a dynamic table  
-
-🎓 **Student**  
-- Secure login  
-- View personal attendance records  
-- Track attendance percentage    
-
-  
-- Built **Teacher component** to display students’ attendance in a table format.  
-- Faced a challenge: dates were stored in an array, attendance as `{date: status}`.  
-- Solved it by mapping dates and matching keys.  
-- Designed a scrollable table with fixed student info + scrollable attendance.  
-
-🚀 **Final Thoughts**  
-
-This project evolved from a simple CRUD app into a secure, scalable, production-ready MERN application.  
-
-It demonstrates:  
-- Building & securing full-stack apps  
-- Real-world CI/CD with Docker + GitHub Actions + Render + Netlify  
-- Strong focus on security, scalability, and clean UI/UX  
-
-📌 This project showcases both my technical expertise (**MERN stack, DevOps, security**) and my ability to deliver a **professional-grade deployment pipeline**.  
-
+**Student Attendance Management System**
+Full-stack web application built with React, Node.js, Express, and MongoDB.
